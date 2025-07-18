@@ -9,7 +9,20 @@ dotenv.config({
     path: './env'
 });
 
-connectionDB();
+//because whenever asynchronous operation is going to return then ir return in the form of promise
+connectionDB()
+.then(() => {
+    app.listen((process.env.PORT || 8000), () => {
+        console.log(`Server is running at PORT: ${process.env.PORT}`);
+        
+
+    })
+})
+.catch((error)=>{
+    console.log(`MONGO_DB connection ERR!!! :` + error);
+    
+}
+)
 
 /*
 import express from 'express';
